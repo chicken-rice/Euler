@@ -1,11 +1,10 @@
 from math import sqrt
 
-def print_product(num):
+def two_3_digit(num):
     root = int(sqrt(num))
 
     for i in xrange(root, 1000):
         if (num % i) == 0:
-            print i, num/i, num
             return True
 
     return False
@@ -19,7 +18,7 @@ def is_palindrome(num):
 
 if __name__ == '__main__':
     for i in xrange(999*999, 100*100, -1):
-        if is_palindrome(i):
-            if print_product(i):
-                break;
+        if is_palindrome(i) and two_3_digit(i):
+            print i
+            break;
             
