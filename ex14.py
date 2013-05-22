@@ -1,6 +1,6 @@
-def calc_chain(num, data = [-1 for i in xrange(10**8)]):
+def calc_chain(num, data = {}):
 
-    if data[num] != -1:
+    if num in data:
         return data[num]
 
     if num == 1:
@@ -17,8 +17,6 @@ if __name__ == '__main__':
 
     for i in xrange(1, 10**6):
         chain_num[i] = calc_chain(i)
-        #print chain_num[i]
-        #if i > 30:
-        #    break
 
-    print max(xrange(len(chain_num)), key=lambda i: chain_num[i])
+    max_index = max(xrange(len(chain_num)), key=lambda i: chain_num[i])
+    print max_index, chain_num[max_index]
