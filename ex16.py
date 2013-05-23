@@ -1,2 +1,2 @@
 if __name__ == '__main__':
-    print 2 ** 1000
+    print sum(map(int, list(str(2**1000))))
