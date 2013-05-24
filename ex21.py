@@ -6,12 +6,12 @@ def f_d(num):
 
     div = [1]
 
-    for i in xrange(2, int(sqrt(num))):
+    for i in xrange(2, int(sqrt(num))+1):
         if num % i == 0:
             div.extend([i, num/i])
 
     if sqrt(num) == int(sqrt(num)):
-        div.append(int(sqrt(num)))
+        div.remove(int(sqrt(num)))
 
     return sum(div)
 

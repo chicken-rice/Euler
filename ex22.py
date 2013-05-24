@@ -1,7 +1,7 @@
 def read_file():
-    text = open('ex22.txt').read()
-    data = text.replace('"', '').split(',')
-    data.sort()
+    text = open('ex22.txt').read().split(',')
+    data = text.replace('"', '').sort()
+    
     return [''] + data
 
 
