@@ -39,36 +39,58 @@ def get_sum_of_abun(num, abun_list):
         return -1
 
 
+def get_list(abun, flag):
+    mul = lambda a, f: a*f
+    fil_list = set(map(mul, abun, flag))
+    fil_list.discard(0)
+    fil_list2 = list(fil_list)
+    fil_list2.sort()
+    return fil_list2
+
 if __name__ == '__main__':
     sum_num = 0
-    max_num = 28124
+    max_num = 28124 + 40
     #max_num = 5000
 
     abun_list = list(set(map(get_abun, xrange(12, max_num))))
     abun_list.remove(-1)
+    abun_list.sort()
     get_SOA = lambda num: get_sum_of_abun(num, abun_list)
 
-#    odd = lambda num: num % 2 == 1
-#    even = lambda num: num % 2 == 0
+    odd = lambda num: num % 2 == 1
+    even = lambda num: num % 2 == 0
 
-#    odd_list = map(odd, abun_list)
-#    even_list = map(even, abun_list)
+    odd_flag = map(odd, abun_list)
+    even_flag = map(even, abun_list)
     #3print 'test'
 #    print 'kisu'
 #    print sum(odd_list)
 #    print sum(even_list)
 #    print odd_list.index(True)
-#    print abun_list[odd_list.index(True)]
+    
+    print abun_list[odd_flag.index(True)]
+    print abun_list[even_flag.index(True)]
 
-    SOA_list = list(set(map(get_SOA, xrange(12, max_num))))
-    SOA_list.remove(-1)
+    odd_list = get_list(abun_list, odd_flag)
+    even_list = get_list(abun_list, even_flag)
+    print odd_list
+
+    temp = []
+    last = 0
+    for i in odd_list:
+        temp.append(i-last)
+        last = i
+
+    #print temp
+#    SOA_list = list(set(map(get_SOA, xrange(12, max_num))))
+#    SOA_list.remove(-1)
 
     #abun_list.sort()
     #SOA_list.sort()
 #    print abun_list[:100]
 #    print 'len', len(abun_list)
     #print SOA_list
-    print sum(SOA_list)
+#    print sum(SOA_list)
 #    for i in range(12, 28123 + 1):
  #       if is_abundant(i):
   #          abun_list.append(i)
