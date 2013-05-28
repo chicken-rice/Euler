@@ -23,15 +23,6 @@ def is_sum_of_abun(num, abun_list):
     is_true = lambda abun: (num-abun) in abun_list
     return any(map(is_true, abun_list))
 
-    #for abun in abun_list:
-     #   if abun > num:
-     #       break
-     #   if (num-abun) in abun_list:
-     #       return True
-
-   # return False
-
-
 def get_sum_of_abun(num, abun_list):
     if is_sum_of_abun(num, abun_list):
         return num
@@ -47,10 +38,24 @@ def get_list(abun, flag):
     fil_list2.sort()
     return fil_list2
 
+def reduce_list(list1, list2, num_list):
+    for i in list1:
+        func1 = lambda x: x - i
+        func2 = lambda x: x + i
+
+        func1_list = map(func1, num_list)
+        inter_set = set(func1_list).intersection(set(list2))
+        func2_list = map(func2, inter_set)
+        num_list = list(set(num_list).difference(set(func2_list)))
+
+    return num_list
+        
+
 if __name__ == '__main__':
     sum_num = 0
     max_num = 28124 + 40
-    #max_num = 5000
+    max_num = 5000
+    max_num = 28124
 
     abun_list = list(set(map(get_abun, xrange(12, max_num))))
     abun_list.remove(-1)
@@ -62,11 +67,6 @@ if __name__ == '__main__':
 
     odd_flag = map(odd, abun_list)
     even_flag = map(even, abun_list)
-    #3print 'test'
-#    print 'kisu'
-#    print sum(odd_list)
-#    print sum(even_list)
-#    print odd_list.index(True)
     
     print abun_list[odd_flag.index(True)]
     print abun_list[even_flag.index(True)]
@@ -74,6 +74,14 @@ if __name__ == '__main__':
     odd_list = get_list(abun_list, odd_flag)
     even_list = get_list(abun_list, even_flag)
     print odd_list
+
+    num_list = range(max_num)
+    num_list = reduce_list(odd_list, even_list, num_list)
+    print 'odd even', len(num_list)
+    num_list = reduce_list(even_list, even_list, num_list)
+    print 'even, even', len(num_list)
+    num_list = reduce_list(odd_list, odd_list, num_list)
+    print sum(num_list), 'odd odd',len(num_list)
 
     temp = []
     last = 0
