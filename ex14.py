@@ -15,7 +15,7 @@ def calc_chain(num, data = {}):
 if __name__ == '__main__':
     chain_num = [0 for i in xrange(10**6)]
 
-    for i in xrange(1, 10**6):
+    for i in xrange(1, 10):
         chain_num[i] = calc_chain(i)
 
     max_index = max(xrange(len(chain_num)), key=lambda i: chain_num[i])
