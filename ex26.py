@@ -1,37 +1,31 @@
-def get_rec_num(num, div_list):
+def get_rec_num(num):
+    table = [-1 for i in range(num*10+1)]
+    temp_num = 1
     count = 0
-    current = num
 
-    print 'get'
-    while div_list[current] != 0:
-        temp = current
-        current = div_list[current]
-        print current, div_list[current]
-        div_list[temp] = 0
-        count += 1
+    while True:
+        if temp_num == 0:
+            return 0
 
-    return count
+        div_num = 0
+        while div_num == 0:
+            temp_num *= 10
+            div_num = temp_num / num
+            count += 1
 
-def recur_cycle(nume, deno, div_list):
-    print nume, deno, div_list
-    dec_nume = nume
-    div_num = 0
-    while div_num == 0:
-        dec_nume *= 10
-        div_num = dec_nume / deno
-        mod_num = dec_nume % deno
-
-    if mod_num == 0:
-        return 0
-
-    div_list[dec_nume/10] = mod_num
- 
-    if div_list[mod_num] == 0:
-        #print mod_num, deno, div_list
-        return recur_cycle(mod_num, deno, div_list)
-    else:
-        return get_rec_num(mod_num, div_list)
+        if table[temp_num] != -1:
+            return count - table[temp_num]
+        else:
+            table[temp_num] = count
+            temp_num = temp_num % num
 
 if __name__ == '__main__':
-    num = 17 
-    print recur_cycle(1, num, [0 for i in xrange(10*num)])
+    max_rec = 0
+    max_num = 0
+    for i in xrange(1, 1000):
+        temp_rec = get_rec_num(i)
+        if max_rec < temp_rec:
+            max_rec = temp_rec
+            max_num = i
+
+    print "ans", max_num
